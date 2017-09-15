@@ -1,0 +1,12 @@
+# Created by .gitignore support plugin (hsz.mobi)
+cordova-plugin-bixolon-print.iml
+
+# Ignore Web Storm #
+.idea
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db

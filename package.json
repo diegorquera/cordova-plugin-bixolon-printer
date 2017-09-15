@@ -1,0 +1,35 @@
+{
+  "name": "cordova-plugin-bixolon-printer",
+  "version": "1.6.2",
+  "description": "A Cordova/Phonegap driver for Bixolon printers",
+  "cordova": {
+    "id": "it.alfonsovinti.cordova.plugins.bixolonprinta",
+    "platforms": [
+      "android",
+      "browser"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegorquera/cordova-plugin-bixolon-printer.git"
+  },
+  "keywords": [
+    "cordova",
+    "bixolon",
+    "printer",
+    "wifi",
+    "bluetooth",
+    "print",
+    "android",
+    "install",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/diegorquera/cordova-plugin-bixolon-printer#readme"
+}
