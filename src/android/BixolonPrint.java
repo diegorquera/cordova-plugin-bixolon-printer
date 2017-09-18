@@ -501,13 +501,15 @@ public class BixolonPrint extends CordovaPlugin {
                     for (int j = 0; j < paperWidth; j++) {
                         text += hrStr;
                     }
+                    text += "\r\n";
                 }
 
                 textAlignment = this.getAlignment(align);
                 textAttribute = this.getAttribute(fontType, fontStyle);
                 textSize = this.getTextSize(width, height);
 
-                mBixolonPrinter.printText(text + "\r\n", textAlignment, textAttribute, textSize, false);
+                // mBixolonPrinter.printText(text + "\r\n", textAlignment, textAttribute, textSize, false);
+                mBixolonPrinter.printText(text, textAlignment, textAttribute, textSize, false);
 
             } catch (JSONException e2) {
                 this.isValidAction = false;

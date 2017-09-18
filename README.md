@@ -1,4 +1,4 @@
-BixolonPrint Corodva Plugin
+BixolonPrint Cordova Plugin
 ==============
 
 ## Note to Bringg Developers
@@ -19,13 +19,7 @@ Below are the methods for installing this plugin automatically using command lin
 ### Using the Cordova CLI
 
 ```
-$ cordova plugin add https://github.com/xyzxyz442/cordova-plugin-bixolon-print.git
-```
-
-### Using the Phonegap CLI
-
-```
-$ phonegap local plugin add https://github.com/xyzxyz442/cordova-plugin-bixolon-print.git
+$ cordova plugin add cordova-plugin-bixolon-printer
 ```
 
 ## Plugin Options
@@ -187,7 +181,7 @@ cordova.plugins.bixolonPrint.stopMsrReaderListener(successCallback, errorCallbac
 ### Print a text
 
 ```javascript
-cordova.plugins.bixolonPrint.addLine("hello cordova!");
+cordova.plugins.bixolonPrint.addLine("hello cordova!\r\n");
 cordova.plugins.bixolonPrint.printText();
 ```
 ### Print a custom text
@@ -195,7 +189,7 @@ cordova.plugins.bixolonPrint.printText();
 ```javascript
 // compose text
 cordova.plugins.bixolonPrint.addLine({
-    text: "hello cordova!"
+    text: "hello cordova!\r\n",
     textAlign: cordova.plugins.bixolonPrint.TextAlign.CENTER,
     fontStyle: cordova.plugins.bixolonPrint.FontStyle.BOLD
 });

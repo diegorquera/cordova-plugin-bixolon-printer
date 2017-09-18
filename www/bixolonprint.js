@@ -42,7 +42,7 @@ var BixolonPrint = function() {
    *
    * @type {string}
    */
-  this.version = "1.6.2";
+  this.version = "1.7.0";
 
   /**
    *
@@ -59,7 +59,7 @@ var BixolonPrint = function() {
     formFeed: false,
     autoConnect: true, // Android only
     toastMessage: true, // Android only
-    separator: '=',
+    separator: '-',
     codePage: 16
   };
 
@@ -289,7 +289,7 @@ BixolonPrint.prototype.printQRCode = function(data, successCallback, errorCallba
   }
 
   var printConfig = this.settings;
-  config = config || {}
+  config = config || {};
   data = data || {};
 
   if (!this._isObject(config)) {
@@ -333,7 +333,7 @@ BixolonPrint.prototype.printBarCode = function(data, successCallback, errorCallb
   }
 
   var printConfig = this.settings;
-  config = config || {}
+  config = config || {};
   data = data || {};
 
   if (!this._isObject(config)) {
@@ -387,7 +387,7 @@ BixolonPrint.prototype.printText = function(successCallback, errorCallback, conf
   }
 
   if (config.lineFeed && parseInt(config.lineFeed) === config.lineFeed && config.lineFeed > 0) {
-    printConfig.lineFeed = config.lineFeed
+    printConfig.lineFeed = config.lineFeed;
   }
 
   if (config.formFeed === false || config.formFeed === true) {
@@ -435,7 +435,7 @@ BixolonPrint.prototype.cutPaper = function(successCallback, errorCallback, confi
   }
 
   if (config.lineFeed && parseInt(config.lineFeed) === config.lineFeed && config.lineFeed > 0) {
-    printConfig.lineFeed = config.lineFeed
+    printConfig.lineFeed = config.lineFeed;
   }
 
   if (config.formFeed === false || config.formFeed === true) {
@@ -508,11 +508,11 @@ BixolonPrint.prototype.startMsrReaderListener = function(successCallback, errorC
     "BixolonPrint",
     "startMsrReaderListener", []
   );
-}
+};
 
 BixolonPrint.prototype.msrReaderRead = function(data) {
   bixolonPrint.msrReaderReadCallback(data);
-}
+};
 
 BixolonPrint.prototype.stopMsrReaderListener = function(successCallback, errorCallback) {
 
@@ -534,7 +534,7 @@ BixolonPrint.prototype.stopMsrReaderListener = function(successCallback, errorCa
     "BixolonPrint",
     "stopMsrReaderListener", []
   );
-}
+};
 
 BixolonPrint.prototype.startConnectionListener = function(successCallback, errorCallback) {
 
@@ -558,11 +558,11 @@ BixolonPrint.prototype.startConnectionListener = function(successCallback, error
     "BixolonPrint",
     "startConnectionListener", []
   );
-}
+};
 
 BixolonPrint.prototype.connectionChanged = function(data) {
   bixolonPrint.connectionCallback(data);
-}
+};
 
 BixolonPrint.prototype.stopConnectionListener = function(successCallback, errorCallback) {
 
@@ -584,7 +584,7 @@ BixolonPrint.prototype.stopConnectionListener = function(successCallback, errorC
     "BixolonPrint",
     "stopConnectionListener", []
   );
-}
+};
 
 BixolonPrint.prototype.reconnect = function(successCallback, errorCallback) {
   if (!this._isFunction(successCallback)) {
@@ -605,7 +605,7 @@ BixolonPrint.prototype.reconnect = function(successCallback, errorCallback) {
     "BixolonPrint",
     "reconnect", []
   );
-}
+};
 
 BixolonPrint.prototype.disconnect = function(successCallback, errorCallback) {
   if (!this._isFunction(successCallback)) {
@@ -626,7 +626,7 @@ BixolonPrint.prototype.disconnect = function(successCallback, errorCallback) {
     "BixolonPrint",
     "disconnect", []
   );
-}
+};
 
 var bixolonPrint = new BixolonPrint();
 
