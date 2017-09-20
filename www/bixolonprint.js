@@ -42,7 +42,7 @@ var BixolonPrint = function() {
    *
    * @type {string}
    */
-  this.version = "1.7.0";
+  this.version = "1.7.1";
 
   /**
    *
@@ -55,11 +55,11 @@ var BixolonPrint = function() {
    * @type {{lineFeed: number, formFeed: boolean, autoConnect: boolean, toastMessage: boolean, separator: string, codePage: number}}
    */
   this.settings = {
-    lineFeed: 3,
-    formFeed: false,
+    lineFeed: 0,
+    formFeed: true,
     autoConnect: true, // Android only
     toastMessage: true, // Android only
-    separator: '-',
+    separator: '=',
     codePage: 16
   };
 

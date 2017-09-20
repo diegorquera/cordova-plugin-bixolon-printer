@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-bixolon-printer",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A Cordova/Phonegap driver for Bixolon printers",
   "cordova": {
     "id": "it.alfonsovinti.cordova.plugins.bixolonprinta",
