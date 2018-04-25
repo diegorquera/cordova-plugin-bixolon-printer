@@ -35,7 +35,7 @@ var exec = require('cordova/exec');
  * BixolonPrint
  * @constructor
  */
-var BixolonPrint = function() {
+var BixolonPrint = function () {
   var _this = this;
 
   /**
@@ -175,6 +175,14 @@ var BixolonPrint = function() {
 
   this.msrReaderReadCallback = null;
   this.connectionCallback = null;
+
+  //image alignment
+  this.ALIGNMENT = {
+    ASIS: -11,
+    LEFT: -1,
+    CENTER: -2,
+    RIGHT: -3
+  };
 };
 
 /**
@@ -182,7 +190,7 @@ var BixolonPrint = function() {
  * @returns {boolean}
  * @private
  */
-BixolonPrint.prototype._isObject = function(obj) {
+BixolonPrint.prototype._isObject = function (obj) {
   return typeof obj === 'object' && !!obj;
 };
 
@@ -192,7 +200,7 @@ BixolonPrint.prototype._isObject = function(obj) {
  * @returns {boolean}
  * @private
  */
-BixolonPrint.prototype._isFunction = function(obj) {
+BixolonPrint.prototype._isFunction = function (obj) {
   return typeof obj === 'function';
 };
 
@@ -200,7 +208,7 @@ BixolonPrint.prototype._isFunction = function(obj) {
  *
  * @param separator
  */
-BixolonPrint.prototype.addHr = function(separator) {
+BixolonPrint.prototype.addHr = function (separator) {
 
   // default separator
   var sp = this.settings.separator;
@@ -218,7 +226,7 @@ BixolonPrint.prototype.addHr = function(separator) {
  *
  * @param obj
  */
-BixolonPrint.prototype.addLine = function(obj) {
+BixolonPrint.prototype.addLine = function (obj) {
 
   var rObj = {
     text: '',
@@ -274,16 +282,16 @@ BixolonPrint.prototype.addLine = function(obj) {
  * @param errorCallback
  * @param config
  */
-BixolonPrint.prototype.printQRCode = function(data, successCallback, errorCallback, config) {
+BixolonPrint.prototype.printQRCode = function (data, successCallback, errorCallback, config) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.printQRCode success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.warn('BixolonPrint.printQRCode failure: ' + error);
     };
   }
@@ -318,16 +326,16 @@ BixolonPrint.prototype.printQRCode = function(data, successCallback, errorCallba
  * @param errorCallback
  * @param config
  */
-BixolonPrint.prototype.printBarCode = function(data, successCallback, errorCallback, config) {
+BixolonPrint.prototype.printBarCode = function (data, successCallback, errorCallback, config) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.printBarCode success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.warn('BixolonPrint.printBarCode failure: ' + error);
     };
   }
@@ -362,16 +370,16 @@ BixolonPrint.prototype.printBarCode = function(data, successCallback, errorCallb
  * @param errorCallback
  * @param config
  */
-BixolonPrint.prototype.printText = function(successCallback, errorCallback, config) {
+BixolonPrint.prototype.printText = function (successCallback, errorCallback, config) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.printText success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.warn('BixolonPrint.printText failure: ' + error);
     };
   }
@@ -412,16 +420,16 @@ BixolonPrint.prototype.printText = function(successCallback, errorCallback, conf
  * @param errorCallback
  * @param config
  */
-BixolonPrint.prototype.cutPaper = function(successCallback, errorCallback, config) {
+BixolonPrint.prototype.cutPaper = function (successCallback, errorCallback, config) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.cutPaper success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.warn('BixolonPrint.cutPaper failure: ' + error);
     };
   }
@@ -456,16 +464,16 @@ BixolonPrint.prototype.cutPaper = function(successCallback, errorCallback, confi
  * @param errorCallback
  * @param printStatus
  */
-BixolonPrint.prototype.getStatus = function(successCallback, errorCallback, printStatus) {
+BixolonPrint.prototype.getStatus = function (successCallback, errorCallback, printStatus) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.getStatus success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.getStatus failure: ' + error);
     };
   }
@@ -486,18 +494,18 @@ BixolonPrint.prototype.getStatus = function(successCallback, errorCallback, prin
   );
 };
 
-BixolonPrint.prototype.startMsrReaderListener = function(successCallback, errorCallback) {
+BixolonPrint.prototype.startMsrReaderListener = function (successCallback, errorCallback) {
 
   bixolonPrint.msrReaderReadCallback = successCallback;
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.startMsrReaderListener success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.startMsrReaderListener failure: ' + error);
     };
   }
@@ -510,20 +518,20 @@ BixolonPrint.prototype.startMsrReaderListener = function(successCallback, errorC
   );
 };
 
-BixolonPrint.prototype.msrReaderRead = function(data) {
+BixolonPrint.prototype.msrReaderRead = function (data) {
   bixolonPrint.msrReaderReadCallback(data);
 };
 
-BixolonPrint.prototype.stopMsrReaderListener = function(successCallback, errorCallback) {
+BixolonPrint.prototype.stopMsrReaderListener = function (successCallback, errorCallback) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.stopMsrReaderListener success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.stopMsrReaderListener failure: ' + error);
     };
   }
@@ -536,18 +544,18 @@ BixolonPrint.prototype.stopMsrReaderListener = function(successCallback, errorCa
   );
 };
 
-BixolonPrint.prototype.startConnectionListener = function(successCallback, errorCallback) {
+BixolonPrint.prototype.startConnectionListener = function (successCallback, errorCallback) {
 
   bixolonPrint.connectionCallback = successCallback;
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.startConnectionListener success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.startConnectionListener failure: ' + error);
     };
   }
@@ -560,20 +568,20 @@ BixolonPrint.prototype.startConnectionListener = function(successCallback, error
   );
 };
 
-BixolonPrint.prototype.connectionChanged = function(data) {
+BixolonPrint.prototype.connectionChanged = function (data) {
   bixolonPrint.connectionCallback(data);
 };
 
-BixolonPrint.prototype.stopConnectionListener = function(successCallback, errorCallback) {
+BixolonPrint.prototype.stopConnectionListener = function (successCallback, errorCallback) {
 
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.stopConnectionListener success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.stopConnectionListener failure: ' + error);
     };
   }
@@ -586,15 +594,15 @@ BixolonPrint.prototype.stopConnectionListener = function(successCallback, errorC
   );
 };
 
-BixolonPrint.prototype.reconnect = function(successCallback, errorCallback) {
+BixolonPrint.prototype.reconnect = function (successCallback, errorCallback) {
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.reconnect success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.reconnect failure: ' + error);
     };
   }
@@ -607,15 +615,15 @@ BixolonPrint.prototype.reconnect = function(successCallback, errorCallback) {
   );
 };
 
-BixolonPrint.prototype.disconnect = function(successCallback, errorCallback) {
+BixolonPrint.prototype.disconnect = function (successCallback, errorCallback) {
   if (!this._isFunction(successCallback)) {
-    successCallback = function(response) {
+    successCallback = function (response) {
       console.log('BixolonPrint.disconnect success: ' + response);
     };
   }
 
   if (!this._isFunction(errorCallback)) {
-    errorCallback = function(error) {
+    errorCallback = function (error) {
       console.error('BixolonPrint.disconnect failure: ' + error);
     };
   }
@@ -625,6 +633,35 @@ BixolonPrint.prototype.disconnect = function(successCallback, errorCallback) {
     errorCallback,
     "BixolonPrint",
     "disconnect", []
+  );
+};
+
+/**
+ * for image printing
+ */
+
+BixolonPrint.prototype._isObject = function (obj) {
+  return typeof obj === 'object' && !!obj;
+};
+BixolonPrint.prototype._isFunction = function (obj) {
+  return typeof obj === 'function';
+};
+BixolonPrint.prototype._isUndefined = function (obj) {
+  return typeof obj === 'undefined' || obj === null;
+};
+BixolonPrint.prototype.printBitmap = function (successCallback, errorCallback, config) {
+  var base64Image = config.base64Image;
+
+  var width = !this._isUndefined(config.width) ? config.width : 100;
+  var brightness = !this._isUndefined(config.brightness) ? config.brightness : 50;
+  var alignment = !this._isUndefined(config.alignment) ? config.alignment : this.ALIGNMENT.CENTER;
+
+  exec(
+    successCallback,
+    errorCallback,
+    "BixolonPrint",
+    "printBitmap",
+    [base64Image, width, brightness, alignment]
   );
 };
 

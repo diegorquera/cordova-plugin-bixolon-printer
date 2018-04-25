@@ -114,6 +114,14 @@ cordova.plugins.bixolonPrint.addHr(separator String);
 ```javascript
 cordova.plugins.bixolonPrint.printText(successCallback, errorCallback, config Object);
 ```
+### Print Image (base64)
+
+Print Image function based on https://github.com/itsKaynine/cordova-plugin-bixolon-printing
+Only work in Android with base64 formate
+
+```javascript
+cordova.plugins.bixolonPrint.printBitmap(successCallback, errorCallback, config Object);
+```
 
 ### Cut paper
 
@@ -208,6 +216,24 @@ cordova.plugins.bixolonPrint.printText(
     }
 );
 ```
+### Print Image (base64)
+
+```javascript
+cordova.plugins.bixolonPrint.printBitmap(successCallback, errorCallback, {
+		base64Image: String, //base64 string
+		width: Int, //width 
+		brightness: int, // 0 to 100 (Bixolon recommeded 13 to 88)
+		alignment: int,
+});
+function successCallback(e) {
+	alert('success')
+}
+function errorCallback(e) {
+ alert('error' + e);
+}
+
+```
+
 ### Print Barcode
 
 ```javascript

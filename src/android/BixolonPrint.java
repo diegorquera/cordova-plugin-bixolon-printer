@@ -27,6 +27,10 @@
 
 package it.alfonsovinti.cordova.plugins.bixolonprint;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.util.Map;
 import java.util.HashMap;
 //import java.util.Queue;
@@ -73,6 +77,7 @@ public class BixolonPrint extends CordovaPlugin {
     public static final String ACTION_RECONNECT = "reconnect";
     public static final String ACTION_DISCONNECT = "disconnect";
     public static final String ACTION_STOP_CONNECTION_LISTENER = "stopConnectionListener";
+    public static final String ACTION_PRINT_BITMAP = "printBitmap";
 
     // Alignment string
     public static final String ALIGNMENT_LEFT = "LEFT";
@@ -240,6 +245,9 @@ public class BixolonPrint extends CordovaPlugin {
         } else if (ACTION_STOP_CONNECTION_LISTENER.equals(action)) {
             this.optAutoConnect = true;
             this.stopConnectionListener();
+        } else if (ACTION_PRINT_BITMAP.equals(action)) {
+            this.optAutoConnect = true;
+            this.optToastMessage = true;
         } else {
             this.isValidAction = false;
             this.cbContext.error("Invalid Action");
@@ -288,6 +296,8 @@ public class BixolonPrint extends CordovaPlugin {
             this.cutPaper();
         } else if (ACTION_GET_STATUS.equals(this.lastActionName)) {
             this.getStatus();
+        } else if(ACTION_PRINT_BITMAP.equals(this.lastActionName)){
+            this.printBitmap();
         }
 
         this.sendConnectionData();
@@ -344,6 +354,54 @@ public class BixolonPrint extends CordovaPlugin {
         }
 
         Log.d(TAG, "BixolonPrint.onDisconnect_END");
+    }
+
+    /**
+        print image base64
+        based on 
+        https://github.com/itsKaynine/cordova-plugin-bixolon-printing
+     */
+    public static Bitmap decodeBase64Image(String input) {
+		String trimmed = input.replace("data:image/png;base64,", "").replace("data:image/jpg;base64,", "").replace("data:image/jpeg;base64,", "");
+
+	    byte[] arr = Base64.decode(trimmed, 0);
+	    return BitmapFactory.decodeByteArray(arr, 0, arr.length);
+	}
+    private void printBitmap() {
+            Log.d(TAG, "printBitmap_BEGIN");
+        String base64Image;
+        int width ;
+        int brightness;
+        int alignment;
+        try {
+            base64Image = this.lastActionArgs.getString(0);
+            width = this.lastActionArgs.getInt(1);
+            brightness = this.lastActionArgs.getInt(2);
+            alignment = this.lastActionArgs.getInt(3);
+        }catch (JSONException e1) {
+            this.isValidAction = false;
+            this.actionError = "print error: " + e1.getMessage();
+            this.disconnect();
+            return;
+        }
+
+            int lineFeed = 3;
+            Boolean formFeed = false;
+
+
+
+        Bitmap bmp = decodeBase64Image(base64Image);
+        try{
+            mBixolonPrinter.printBitmap(bmp,alignment, width,brightness,false);
+        }
+        catch (Exception e2) {
+            this.isValidAction = false;
+            this.actionError = "print error: " + e2.getMessage();
+            this.disconnect();
+            return;
+        }
+
+        this.actionSuccess = "print success";
     }
 
     private void printQRCode() {
